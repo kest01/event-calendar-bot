@@ -1,0 +1,17 @@
+body {
+  margin: 0;
+  padding: 12px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--tg-theme-bg-color, #fff);
+  color: var(--tg-theme-text-color, #000);
+}
+
+header {
+  margin-bottom: 12px;
+}
+
+#calendar {
+  background: var(--tg-theme-secondary-bg-color, #f5f5f5);
+  padding: 8px;
+  border-radius: 12px;
+}
