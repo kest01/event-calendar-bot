@@ -2,7 +2,7 @@ import express from 'express'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import './bot.js'
-import './api.js'
+// import './api.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -19,5 +19,5 @@ app.get('/', (_, res) => {
 
 const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {
-  console.log(XXXINLINECODEXXX4XXXINLINECODEXXX)
+  console.log('Error!')
 })
