@@ -1,12 +1,18 @@
 import TelegramBot from 'node-telegram-bot-api'
+import 'dotenv/config'
 
-const bot = new TelegramBot(process.env.BOT_TOKEN, { polling: true })
+if (process.env.BOT_ENABLED) {
+  const bot = new TelegramBot(process.env.BOT_TOKEN, { polling: true })
 
-bot.onText(/\/start/, msg => {
-  bot.sendMessage(msg.chat.id, 'ŒÚÍ˚Ú¸ Mini App', {
-    reply_markup: {
-      keyboard: [[{ text: 'ŒÚÍ˚Ú¸', web_app: { url: process.env.APP_URL } }]],
-      resize_keyboard: true
-    }
+  bot.onText(/\/start/, msg => {
+    console.log(msg)
+    bot.sendMessage(msg.chat.id, '–û—Ç–∫—Ä—ã—Ç—å Mini App', {
+      reply_markup: {
+        keyboard: [[{ text: '–û—Ç–∫—Ä—ã—Ç—å', web_app: { url: process.env.APP_URL } }]],
+        resize_keyboard: true
+      }
+    })
   })
-})
+
+  console.log('Telegram Bot started')
+}
