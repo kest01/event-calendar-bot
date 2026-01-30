@@ -15,11 +15,12 @@
   "dependencies": {
     "@fullcalendar/core": "^6.1.11",
     "@fullcalendar/daygrid": "^6.1.11",
+    "dotenv": "^17.2.3",
     "express": "^4.19.2",
     "node-telegram-bot-api": "^0.66.0"
   },
   "devDependencies": {
-    "vite": "^5.0.0",
-    "concurrently": "^8.2.2"
+    "concurrently": "^8.2.2",
+    "vite": "^5.0.0"
   }
 }

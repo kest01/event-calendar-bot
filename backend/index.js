@@ -1,6 +1,7 @@
 import express from 'express'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import 'dotenv/config'
 import './bot.js'
 // import './api.js'
 
@@ -19,5 +20,6 @@ app.get('/', (_, res) => {
 
 const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {
-  console.log('Error!')
+  console.log('Started!')
+  console.log(process.env)
 })
