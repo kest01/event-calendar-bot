@@ -1,6 +1,8 @@
 let tooltip
 
 export function showTooltip(info) {
+  hideTooltip()
+
   const event = info.event
   const { description, coach, place } = event.extendedProps
 
@@ -16,12 +18,39 @@ export function showTooltip(info) {
 
   document.body.appendChild(tooltip)
 
-  const rect = info.el.getBoundingClientRect()
-  tooltip.style.left = rect.left + window.scrollX + 'px'
-  tooltip.style.top = rect.bottom + window.scrollY + 6 + 'px'
+  positionTooltip(info.el, tooltip)
 }
 
 export function hideTooltip() {
   tooltip?.remove()
   tooltip = null
+}
+
+function positionTooltip(targetEl, tooltipEl) {
+  const margin = 8
+
+  const targetRect = targetEl.getBoundingClientRect()
+  const tooltipRect = tooltipEl.getBoundingClientRect()
+
+  let top = targetRect.bottom + margin
+  let left = targetRect.left
+
+  // 👉 если выходит за правый край
+  if (left + tooltipRect.width > window.innerWidth) {
+    left = window.innerWidth - tooltipRect.width - margin
+  }
+
+  // 👉 если выходит за левый край
+  if (left < margin) {
+    left = margin
+  }
+
+  // 👉 если выходит за нижний край
+  if (top + tooltipRect.height > window.innerHeight) {
+    top = targetRect.top - tooltipRect.height - margin
+  }
+
+  // финальные координаты
+  tooltipEl.style.left = left + window.scrollX + 'px'
+  tooltipEl.style.top = top + window.scrollY + 'px'
 }
