@@ -13,8 +13,9 @@
     "start": "node dist/backend/index.js"
   },
   "dependencies": {
-    "@fullcalendar/core": "^6.1.11",
+    "@fullcalendar/core": "^6.1.20",
     "@fullcalendar/daygrid": "^6.1.11",
+    "@fullcalendar/multimonth": "^6.1.20",
     "dotenv": "^17.2.3",
     "express": "^4.19.2",
     "node-telegram-bot-api": "^0.66.0"
