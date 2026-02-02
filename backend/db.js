@@ -1,0 +1,25 @@
+import sqlite3 from "sqlite3"; 
+import path from 'path'
+import { currentDir } from './utils.js'
+
+sqlite3.verbose();
+const __dirname = currentDir()
+
+export const db = new sqlite3.Database(
+  path.join(__dirname + '/data', 'db.sqlite')
+)
+
+db.serialize(() => {
+  db.run(`
+    CREATE TABLE IF NOT EXISTS events (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      date TEXT NOT NULL,
+      title TEXT NOT NULL,
+      description TEXT,
+      place TEXT,
+      photo TEXT
+    )
+  `)
+  console.log('Database is created and connected')
+})
+

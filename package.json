@@ -16,9 +16,11 @@
     "@fullcalendar/core": "^6.1.20",
     "@fullcalendar/daygrid": "^6.1.11",
     "@fullcalendar/multimonth": "^6.1.20",
+    "cors": "^2.8.6",
     "dotenv": "^17.2.3",
-    "express": "^4.19.2",
-    "node-telegram-bot-api": "^0.66.0"
+    "express": "^4.22.1",
+    "node-telegram-bot-api": "^0.66.0",
+    "sqlite3": "^5.1.7"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",

@@ -25,7 +25,24 @@ export function initCalendar() {
 
     height: 'auto',
 
-    events: [
+    events: async (info, successCallback, failureCallback) => {
+    try {
+      const params = new URLSearchParams({
+        start_date: info.startStr
+      })
+
+      const response = await fetch(
+        `/api/events?${params}`
+      )
+
+      const events = await response.json()
+      successCallback(events)
+    } catch (e) {
+      failureCallback(e)
+    }
+  },
+
+/*     events: [
       {
         id: '1',
         title: 'Тренировка',
@@ -46,7 +63,7 @@ export function initCalendar() {
         }
       }
     ],
-
+ */
     eventMouseEnter(info) {
       showTooltip(info)
     },

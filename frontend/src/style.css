@@ -1,3 +1,20 @@
+:root {
+  --fc-day-bg: var(--tg-theme-secondary-bg-color, #f5f5f5);
+  --fc-day-text: var(--tg-theme-text-color, #222);
+  --fc-day-border: rgba(255, 255, 255, 0.08);
+  --fc-today-bg: color-mix(
+    in srgb,
+    var(--tg-theme-button-color, #2ea6ff) 18%,
+    var(--tg-theme-secondary-bg-color, #1c1c1e)
+  );
+
+  --fc-today-text: var(--tg-theme-text-color, #fff);
+
+  --fc-tooltip-bg: var(--tg-theme-secondary-bg-color, #1c1c1e);
+  --fc-tooltip-border: rgba(255, 255, 255, 0.12);
+  --fc-tooltip-text: var(--tg-theme-text-color, #fff);
+}
+
 body {
   margin: 0;
   padding: 12px;
@@ -20,22 +37,23 @@ header {
   position: absolute;
   z-index: 9999;
   max-width: 260px;
-  background: var(--tg-theme-secondary-bg-color, #fff);
-  color: var(--tg-theme-text-color, #000);
-  border-radius: 12px;
   padding: 10px 12px;
-  box-shadow: 0 6px 24px rgba(0,0,0,0.15);
   font-size: 13px;
+  background-color: var(--fc-tooltip-bg);
+  color: var(--fc-tooltip-text);
+  border: 1px solid var(--fc-tooltip-border);
+  border-radius: 12px;
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.4),
+    inset 0 0 0 0.5px rgba(255, 255, 255, 0.04);
 }
 
 .fc-tooltip p {
   margin: 6px 0;
 }
 
-:root {
-  --fc-day-bg: var(--tg-theme-secondary-bg-color, #f5f5f5);
-  --fc-day-text: var(--tg-theme-text-color, #222);
-  --fc-day-border: rgba(255, 255, 255, 0.08);
+.fc-tooltip strong {
+  color: var(--tg-theme-link-color, #4ea1ff);
 }
 
 .fc-multimonth-title {
@@ -67,6 +85,7 @@ header {
 }
 
 .fc-day-today .fc-daygrid-day-frame {
-  background-color: rgba(46, 166, 255, 0.15);
+  background-color: var(--fc-today-bg);
+  color: var(--fc-today-text);
 }
 
