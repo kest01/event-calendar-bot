@@ -1,6 +1,6 @@
 import { Calendar } from '@fullcalendar/core'
 import multiMonthPlugin from '@fullcalendar/multimonth'
-import {showTooltip, hideTooltip} from './tooltip.js'
+import {showEventTooltip, hideEventTooltip} from './event_tooltip'
 
 export function initCalendar() {
   const calendarEl = document.getElementById('calendar')
@@ -42,34 +42,12 @@ export function initCalendar() {
     }
   },
 
-/*     events: [
-      {
-        id: '1',
-        title: 'Тренировка',
-        start: '2026-02-05',
-        extendedProps: {
-          description: 'Силовая тренировка в зале',
-          coach: 'Иван Иванов',
-          place: 'Зал №2'
-        }
-      },
-      {
-        id: '2',
-        title: 'Соревнования',
-        start: '2026-03-12',
-        extendedProps: {
-          description: 'Городской чемпионат',
-          place: 'Стадион'
-        }
-      }
-    ],
- */
     eventMouseEnter(info) {
-      showTooltip(info)
+      showEventTooltip(info)
     },
 
     eventMouseLeave() {
-      hideTooltip()
+      hideEventTooltip()
     }
   })
 

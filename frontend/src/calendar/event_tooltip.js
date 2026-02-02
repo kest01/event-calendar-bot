@@ -1,7 +1,7 @@
 let tooltip
 
-export function showTooltip(info) {
-  hideTooltip()
+export function showEventTooltip(info) {
+  hideEventTooltip()
 
   const event = info.event
   const { description, coach, place } = event.extendedProps
@@ -21,7 +21,7 @@ export function showTooltip(info) {
   positionTooltip(info.el, tooltip)
 }
 
-export function hideTooltip() {
+export function hideEventTooltip() {
   tooltip?.remove()
   tooltip = null
 }

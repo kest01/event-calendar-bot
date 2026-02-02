@@ -1,5 +1,5 @@
-import './style.css'
-import { initCalendar } from './calendar.js'
+import './styles/main.css'
+import { initCalendar } from './calendar/calendar.js'
 
 const tg = window.Telegram.WebApp
 tg.ready()
