@@ -14,3 +14,29 @@ header {
   margin-bottom: 12px;
 }
 
+.btn {
+  flex: 1;
+
+  height: 44px;
+  border-radius: 12px;
+
+  font-size: 15px;
+  font-weight: 500;
+
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: var(--tg-theme-button-color, #2ea6ff);
+  color: var(--tg-theme-button-text-color);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--tg-theme-button-color, #2ea6ff);
+}
+
+.btn:active {
+  transform: scale(0.98);
+}

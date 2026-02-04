@@ -21,26 +21,28 @@
 
   <div id="event-modal" hidden class="modal">
     <div class="modal-content">
-      <h3>Новое событие</h3>
+      <h3 class="modal-title">Новое событие</h3>
 
-      <label>
-        Название
-        <input id="event-title" />
-      </label>
+      <div class="form">
+        <label class="field">
+          <span class="field-label">Название</span>
+          <input id="event-title" type="text" />
+        </label>
 
-      <label>
-        Описание
-        <textarea id="event-description"></textarea>
-      </label>
+        <label class="field">
+          <span class="field-label">Описание</span>
+          <textarea id="event-description" rows="3"></textarea>
+        </label>
 
-      <label>
-        Дата
-        <input id="event-date" type="date" />
-      </label>
+        <label class="field">
+          <span class="field-label">Дата</span>
+          <input id="event-date" type="date" />
+        </label>
+      </div>
 
       <div class="modal-actions">
-        <button id="cancel-btn">Отмена</button>
-        <button id="save-btn">Сохранить</button>
+        <button class="btn btn-secondary" id="cancel-btn">Отмена</button>
+        <button class="btn btn-primary" id="save-btn">Сохранить</button>
       </div>
     </div>
   </div>
