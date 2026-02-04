@@ -1,14 +1,17 @@
 import { Calendar } from '@fullcalendar/core'
 import multiMonthPlugin from '@fullcalendar/multimonth'
-import {showEventTooltip, hideEventTooltip} from './event_tooltip'
+import interactionPlugin from '@fullcalendar/interaction';
+import { showEventTooltip, hideEventTooltip } from './event_tooltip'
+import { showAddEventPopover } from './add_event'
 
 export function initCalendar() {
   const calendarEl = document.getElementById('calendar')
 
   const calendar = new Calendar(calendarEl, {
-    plugins: [multiMonthPlugin],
+    plugins: [multiMonthPlugin, interactionPlugin],
 
     initialView: 'multiMonthYear',
+    selectable: true,
 
     views: {
       multiMonthYear: {
@@ -26,21 +29,21 @@ export function initCalendar() {
     height: 'auto',
 
     events: async (info, successCallback, failureCallback) => {
-    try {
-      const params = new URLSearchParams({
-        start_date: info.startStr
-      })
+      try {
+        const params = new URLSearchParams({
+          start_date: info.startStr
+        })
 
-      const response = await fetch(
-        `/api/events?${params}`
-      )
+        const response = await fetch(
+          `/api/events?${params}`
+        )
 
-      const events = await response.json()
-      successCallback(events)
-    } catch (e) {
-      failureCallback(e)
-    }
-  },
+        const events = await response.json()
+        successCallback(events)
+      } catch (e) {
+        failureCallback(e)
+      }
+    },
 
     eventMouseEnter(info) {
       showEventTooltip(info)
@@ -48,7 +51,11 @@ export function initCalendar() {
 
     eventMouseLeave() {
       hideEventTooltip()
-    }
+    },
+
+    dateClick(info) {
+      showAddEventPopover(info)
+    },
   })
 
   calendar.render()

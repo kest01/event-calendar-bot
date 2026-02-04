@@ -15,6 +15,36 @@
 
   <div id="calendar"></div>
 
+  <div id="add-event-popover" hidden>
+    <button id="add-event-btn">Добавить событие</button>
+  </div>
+
+  <div id="event-modal" hidden class="modal">
+    <div class="modal-content">
+      <h3>Новое событие</h3>
+
+      <label>
+        Название
+        <input id="event-title" />
+      </label>
+
+      <label>
+        Описание
+        <textarea id="event-description"></textarea>
+      </label>
+
+      <label>
+        Дата
+        <input id="event-date" type="date" />
+      </label>
+
+      <div class="modal-actions">
+        <button id="cancel-btn">Отмена</button>
+        <button id="save-btn">Сохранить</button>
+      </div>
+    </div>
+  </div>
+
   <script type="module" src="/src/main.js"></script>
 </body>
 </html>

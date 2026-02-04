@@ -1,5 +1,6 @@
 @import './calendar/calendar.css';
 @import './calendar/event_tooltip.css';
+@import './calendar/add_event.css';
 
 body {
   margin: 0;
