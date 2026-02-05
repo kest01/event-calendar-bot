@@ -24,9 +24,15 @@
       <h3 class="modal-title">Новое событие</h3>
 
       <div class="form">
+        <input id="event-id" type="text" hidden/>
         <label class="field">
           <span class="field-label">Название</span>
           <input id="event-title" type="text" />
+        </label>
+
+        <label class="field">
+          <span class="field-label">Место проведения</span>
+          <input id="event-place" type="text" />
         </label>
 
         <label class="field">
@@ -34,10 +40,23 @@
           <textarea id="event-description" rows="3"></textarea>
         </label>
 
+        <div class="field">
+          <span class="field-label">Дата и время</span>
+
+          <div class="datetime-row">
+            <input id="event-date" type="date" />
+
+            <div class="time-input-wrapper">
+              <input id="event-time" type="text" inputmode="numeric" maxlength="5" placeholder="__:__"/>
+            </div>
+          </div>
+        </div>
+        
         <label class="field">
-          <span class="field-label">Дата</span>
-          <input id="event-date" type="date" />
+          <span class="field-label">Ссылка на фото</span>
+          <input id="event-photo" type="text" />
         </label>
+
       </div>
 
       <div class="modal-actions">

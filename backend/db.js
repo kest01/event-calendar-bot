@@ -13,7 +13,8 @@ db.serialize(() => {
   db.run(`
     CREATE TABLE IF NOT EXISTS events (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      date TEXT NOT NULL,
+      group_id TEXT,
+      start_time TEXT NOT NULL,
       title TEXT NOT NULL,
       description TEXT,
       place TEXT,

@@ -4,16 +4,16 @@ export function showEventTooltip(info) {
   hideEventTooltip()
 
   const event = info.event
-  const { description, coach, place } = event.extendedProps
+  const { description, time, place } = event.extendedProps
 
   tooltip = document.createElement('div')
   tooltip.className = 'fc-tooltip'
 
   tooltip.innerHTML = `
     <strong>${event.title}</strong>
-    ${description ? `<p>${description}</p>` : ''}
-    ${coach ? `<div>Тренер: ${coach}</div>` : ''}
     ${place ? `<div>Место: ${place}</div>` : ''}
+    ${time ? `<div>Время: ${time}</div>` : ''}
+    ${description ? `<p>${description}</p>` : ''}
   `
 
   document.body.appendChild(tooltip)

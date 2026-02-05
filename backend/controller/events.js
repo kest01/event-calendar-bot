@@ -1,26 +1,26 @@
 import { db } from '../db.js'
 
 export function getEvents(req, res) {
-      const { start_date } = req.query
-
+      const { start_time, group_id } = req.query
+  console.log(`Search events. group_id = ${group_id}, start_time = ${start_time}`)
   db.all(
     `
     SELECT *
     FROM events
-    WHERE date >= ?
+    WHERE start_time >= ? AND group_id ${group_id ? '=?' + group_id : 'is NULL'} 
     `,
-    [start_date],
+    [start_time, group_id],
     (err, rows) => {
       if (err) {
         console.error(err.message)
         return res.status(500).json({ error: err.message })
       }
 
-      // формат под FullCalendar
       const events = rows.map(row => ({
         id: row.id,
+        group_id: row.group_id,
         title: row.title,
-        date: row.date,
+        start_time: row.start_time,
         description: row.description,
         place: row.place,         
         photo: row.photo         
@@ -32,14 +32,14 @@ export function getEvents(req, res) {
 }
 
 export function createEvent(req, res) {
-      const { title, date, description, place, photo } = req.body
+      const { group_id, title, start_time, description, place, photo } = req.body
 
   db.run(
     `
-    INSERT INTO events (title, date, description, place, photo)
-    VALUES (?, ?, ?, ?, ?)
+    INSERT INTO events (group_id, title, start_time, description, place, photo)
+    VALUES (?, ?, ?, ?, ?, ?)
     `,
-    [title, date, description, place, photo],
+    [group_id, title, start_time, description, place, photo],
     function (err) {
       if (err) {
         return res.status(500).json({ error: err.message })

@@ -2,7 +2,7 @@ import { Calendar } from '@fullcalendar/core'
 import multiMonthPlugin from '@fullcalendar/multimonth'
 import interactionPlugin from '@fullcalendar/interaction';
 import { showEventTooltip, hideEventTooltip } from './event_tooltip'
-import { showAddEventPopover } from './add_event'
+import { showAddEventPopover, initAddEventModal } from './add_event'
 
 export function initCalendar() {
   const calendarEl = document.getElementById('calendar')
@@ -31,14 +31,26 @@ export function initCalendar() {
     events: async (info, successCallback, failureCallback) => {
       try {
         const params = new URLSearchParams({
-          start_date: info.startStr
+          start_time: info.startStr
         })
 
         const response = await fetch(
           `/api/events?${params}`
         )
 
-        const events = await response.json()
+        const events = (await response.json()).map(event => ({
+            id: event.id,
+            title: event.title,
+            date: parseDateFromIsoTime(event.start_time),
+            extendedProps: {
+              time: parseTimeFromIsoTime(event.start_time),
+              description: event.description,
+              place: event.place,
+              photo: event.photo,
+            }
+          })
+        )
+        // console.log(events)
         successCallback(events)
       } catch (e) {
         failureCallback(e)
@@ -72,8 +84,22 @@ export function initCalendar() {
       }
     )
   })
+
+  initAddEventModal(calendar)
 }
 
 function getCalendarColumns() {
   return window.matchMedia('(min-width: 900px)').matches ? 2 : 1
+}
+
+function parseDateFromIsoTime(isoDate) {
+  return isoDate.split('T')[0]
+}
+
+function parseTimeFromIsoTime(isoDate) {
+  const date = new Date(isoDate)
+  const hours = String(date.getHours()).padStart(2, '0');
+  const minutes = String(date.getMinutes()).padStart(2, '0');
+  const time = `${hours}:${minutes}`
+  return time == '00:00' ? null : time
 }

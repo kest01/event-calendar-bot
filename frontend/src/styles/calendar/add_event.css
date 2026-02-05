@@ -127,3 +127,33 @@
   box-shadow: var(--overlay-shadow);
   z-index: 20;
 }
+
+.datetime-row {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+.datetime-row > * {
+  min-width: 0;
+}
+
+#event-date {
+  flex: 1 1 50%;
+}
+
+.time-input-wrapper {
+  flex: 1 1 50%;
+}
+
+#event-time {
+  width: 80%;
+}
+
+#event-time::placeholder {
+  color: color-mix(
+    in srgb,
+    var(--tg-theme-text-color, #222) 30%,
+    transparent
+  );
+}
