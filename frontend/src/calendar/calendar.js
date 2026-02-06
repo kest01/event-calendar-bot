@@ -72,7 +72,7 @@ export function initCalendar() {
     },
 
     eventClick(info) {
-      console.log("eventClick: " + info)
+      // console.log("eventClick: " + info)
       info.jsEvent.preventDefault()
       info.jsEvent.stopPropagation()
 

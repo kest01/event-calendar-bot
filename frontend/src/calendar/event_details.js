@@ -1,14 +1,24 @@
 import { hideElement, showElement } from "../utils"
+import { editEvent } from "./add_event"
 
 const eventDetailsModel = document.getElementById('event-details-modal')
+let currentEvent
 
 export function initEventDetailsModal() {
     const overlay = eventDetailsModel.querySelector('.modal-overlay')
     overlay.addEventListener('click', closeEventDetails)
+
+    document.querySelector('.event-details-edit-btn')
+        .addEventListener('click', (e) => {
+            // console.log(e)
+            // console.log(currentEvent)
+            closeEventDetails()
+            editEvent(currentEvent)
+        })
 }
 
 export function openEventDetails(event) {
-  console.log(event.title)  
+  currentEvent = event  
   document.getElementById('details-title').textContent = event.title
 
   document.getElementById('details-description').textContent = event.extendedProps.description

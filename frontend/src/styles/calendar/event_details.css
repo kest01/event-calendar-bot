@@ -23,3 +23,39 @@
 .meta-value {
   font-size: 15px;
 }
+
+.event-details-edit-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+
+  width: 28px;
+  height: 28px;
+
+  border-radius: 8px;
+  border: none;
+
+  background: transparent;
+  color: var(--tg-theme-button-color);
+
+  font-size: 14px;
+  line-height: 1;
+
+  display: grid;
+  place-items: center;
+
+  cursor: pointer;
+}
+
+/* Hover / active */
+.event-details-edit-btn:hover {
+  background: color-mix(
+    in srgb,
+    var(--tg-theme-button-color) 12%,
+    transparent
+  );
+}
+
+.event-details-edit-btn:active {
+  transform: scale(0.95);
+}

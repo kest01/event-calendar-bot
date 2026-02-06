@@ -4,7 +4,7 @@ import cors from 'cors'
 import { fileURLToPath } from 'url'
 import 'dotenv/config'
 import './bot.js'
-import { getEvents, createEvent } from './controller/events.js'
+import { getEvents, saveEvent } from './controller/events.js'
 import { currentDir } from './utils.js'
 
 const __dirname = currentDir()
@@ -23,7 +23,7 @@ if (process.env.FRONTEND_ENABLED) {
 }
 
 app.get('/api/events', getEvents)
-app.post('/api/events', createEvent)
+app.post('/api/events', saveEvent)
 
 const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {

@@ -33,7 +33,6 @@ export function initAddEventModal(calendar) {
   
 
   document.getElementById('add-event-btn').addEventListener('click', () => {
-    console.log('add-event-btn')
     popover.hidden = true
 
     dateInput.value = selectedDate
@@ -109,6 +108,18 @@ export function initAddEventModal(calendar) {
 
 export function closeAddEventModal() {
   hideElement(modal)
+}
+
+export function editEvent(event) {
+  dateInput.value = event.extendedProps.date
+  idInput.value = event.id
+  titleInput.value = event.title
+  descInput.value = event.extendedProps.description
+  timeInput.value = event.extendedProps.time
+  placeInput.value = event.extendedProps.place
+  photoInput.value = event.extendedProps.photo
+
+  showElement(modal)
 }
 
 function isValidTime(value) {
