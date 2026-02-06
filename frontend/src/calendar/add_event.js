@@ -1,3 +1,5 @@
+import { hideElement, showElement } from "../utils"
+
 const popover = document.getElementById('add-event-popover')
 const modal = document.getElementById('event-modal')
 const idInput = document.getElementById('event-id')
@@ -26,6 +28,10 @@ export function initAddEventModal(calendar) {
     }
   })
 
+  const overlay = modal.querySelector('.modal-overlay')
+  overlay.addEventListener('click', closeAddEventModal)
+  
+
   document.getElementById('add-event-btn').addEventListener('click', () => {
     console.log('add-event-btn')
     popover.hidden = true
@@ -38,8 +44,7 @@ export function initAddEventModal(calendar) {
     placeInput.value = ''
     photoInput.value = ''
 
-    modal.hidden = false
-    modal.style.display = 'block'
+    showElement(modal)
   })
 
   document.getElementById('save-btn').onclick = async () => {
@@ -73,9 +78,7 @@ export function initAddEventModal(calendar) {
         body: JSON.stringify(payload)
       })
 
-      modal.hidden = true
-      modal.style.display = 'none'
-
+      hideElement(modal)
       calendar.refetchEvents()
     } catch (e) {
       console.error('Save event error: ' + e)
@@ -84,8 +87,7 @@ export function initAddEventModal(calendar) {
   }
 
   document.getElementById('cancel-btn').onclick = async () => {
-    modal.hidden = true
-    modal.style.display = 'none'
+    closeAddEventModal()
   }
 
   timeInput.addEventListener('input', () => {
@@ -103,6 +105,10 @@ export function initAddEventModal(calendar) {
       timeInput.setSelectionRange(0, 0)
     }
   })
+}
+
+export function closeAddEventModal() {
+  hideElement(modal)
 }
 
 function isValidTime(value) {

@@ -3,7 +3,8 @@ import { hideElement, showElement } from "../utils"
 const eventDetailsModel = document.getElementById('event-details-modal')
 
 export function initEventDetailsModal() {
-
+    const overlay = eventDetailsModel.querySelector('.modal-overlay')
+    overlay.addEventListener('click', closeEventDetails)
 }
 
 export function openEventDetails(event) {

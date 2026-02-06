@@ -2,8 +2,8 @@ import { Calendar } from '@fullcalendar/core'
 import multiMonthPlugin from '@fullcalendar/multimonth'
 import interactionPlugin from '@fullcalendar/interaction';
 import { showEventTooltip, hideEventTooltip } from './event_tooltip'
-import { showAddEventPopover, initAddEventModal } from './add_event'
-import { openEventDetails, closeEventDetails } from './event_details'
+import { showAddEventPopover, initAddEventModal, closeAddEventModal } from './add_event'
+import { openEventDetails, closeEventDetails, initEventDetailsModal } from './event_details'
 
 export function initCalendar() {
   const calendarEl = document.getElementById('calendar')
@@ -96,6 +96,16 @@ export function initCalendar() {
   })
 
   initAddEventModal(calendar)
+  initEventDetailsModal()
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !document.getElementById('event-details-modal').hidden) {
+      closeEventDetails()
+    }
+    if (e.key === 'Escape' && !document.getElementById('event-modal').hidden) {
+      closeAddEventModal()
+    }
+  })
 }
 
 function getCalendarColumns() {
