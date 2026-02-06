@@ -1,6 +1,7 @@
 @import './calendar/calendar.css';
 @import './calendar/event_tooltip.css';
 @import './calendar/add_event.css';
+@import './calendar/event_details.css';
 
 body {
   margin: 0;
@@ -39,4 +40,13 @@ header {
 
 .btn:active {
   transform: scale(0.98);
+}
+
+.btn.selected {
+  box-shadow: 0 0 0 2px
+    color-mix(
+      in srgb,
+      var(--tg-theme-button-color) 40%,
+      transparent
+    );
 }

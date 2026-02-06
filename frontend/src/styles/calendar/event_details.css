@@ -1,0 +1,25 @@
+#event-details-modal .modal-content {
+  width: 320px;
+  gap: 14px;
+}
+
+.event-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.meta-row {
+  display: flex;
+  gap: 8px;
+}
+
+.meta-label {
+  min-width: 64px;
+  font-size: 13px;
+  color: var(--tg-theme-hint-color);
+}
+
+.meta-value {
+  font-size: 15px;
+}

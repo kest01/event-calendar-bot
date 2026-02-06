@@ -66,6 +66,40 @@
     </div>
   </div>
 
+  <div id="event-details-modal" class="modal" hidden>
+    <div class="modal-content">
+      <h3 class="modal-title" id="details-title"></h3>
+
+      <div class="event-meta">
+        <div class="meta-row">
+          <span class="meta-label">Когда</span>
+          <span class="meta-value" id="details-date"></span>
+          <span class="meta-value" id="details-time"></span>
+        </div>
+
+        <div class="meta-row" id="details-place-block" hidden>
+          <span class="meta-label">Где</span>
+          <span class="meta-value" id="details-place"></span>
+        </div>
+
+        <div class="meta-row">
+          <span class="meta-label">Описание</span>
+          <span class="meta-value" id="details-description"></span>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn btn-secondary" id="maybe-btn">
+          Возможно участвую
+        </button>
+
+        <button class="btn btn-primary" id="sure-btn">
+          Точно участвую!
+        </button>
+      </div>
+    </div>
+  </div>
+
   <script type="module" src="/src/main.js"></script>
 </body>
 </html>

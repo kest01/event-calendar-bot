@@ -3,6 +3,7 @@ import multiMonthPlugin from '@fullcalendar/multimonth'
 import interactionPlugin from '@fullcalendar/interaction';
 import { showEventTooltip, hideEventTooltip } from './event_tooltip'
 import { showAddEventPopover, initAddEventModal } from './add_event'
+import { openEventDetails, closeEventDetails } from './event_details'
 
 export function initCalendar() {
   const calendarEl = document.getElementById('calendar')
@@ -43,6 +44,7 @@ export function initCalendar() {
             title: event.title,
             date: parseDateFromIsoTime(event.start_time),
             extendedProps: {
+              date: parseDateFromIsoTime(event.start_time),
               time: parseTimeFromIsoTime(event.start_time),
               description: event.description,
               place: event.place,
@@ -68,6 +70,14 @@ export function initCalendar() {
     dateClick(info) {
       showAddEventPopover(info)
     },
+
+    eventClick(info) {
+      console.log("eventClick: " + info)
+      info.jsEvent.preventDefault()
+      info.jsEvent.stopPropagation()
+
+      openEventDetails(info.event)
+    }
   })
 
   calendar.render()
