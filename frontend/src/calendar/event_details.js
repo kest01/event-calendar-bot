@@ -2,6 +2,8 @@ import { hideElement, showElement } from "../utils"
 import { editEvent } from "./add_event"
 
 const eventDetailsModel = document.getElementById('event-details-modal')
+const detailsImg = document.getElementById('details-photo')
+
 let currentEvent
 
 export function initEventDetailsModal() {
@@ -31,6 +33,12 @@ export function openEventDetails(event) {
    showElement(document.getElementById('details-place-block'))
   } else {
    hideElement(document.getElementById('details-place-block'))
+  }
+  if (event.extendedProps.photo) {
+    detailsImg.src = event.extendedProps.photo
+    detailsImg.hidden = false
+  } else {
+    detailsImg.hidden = true
   }
 
   showElement(eventDetailsModel)

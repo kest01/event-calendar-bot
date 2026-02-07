@@ -27,3 +27,13 @@
   color: var(--tg-theme-link-color, #4ea1ff);
 }
 
+.tooltip-photo {
+  display: block;
+
+  max-width: 250px;
+  height: auto;
+
+  /* margin-bottom: 8px; */
+  border-radius: 8px;
+  margin: 0 auto 8px;
+}
