@@ -12,7 +12,8 @@ export function initCalendar() {
     plugins: [multiMonthPlugin, interactionPlugin],
 
     initialView: 'multiMonthYear',
-    selectable: true,
+    selectable: false,
+    selectMirror: false,
 
     views: {
       multiMonthYear: {
@@ -60,6 +61,8 @@ export function initCalendar() {
     },
 
     eventMouseEnter(info) {
+      const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0
+      if (isTouchDevice) return
       showEventTooltip(info)
     },
 
@@ -68,6 +71,7 @@ export function initCalendar() {
     },
 
     dateClick(info) {
+      // alert('dateClick()')
       showAddEventPopover(info)
     },
 
@@ -80,6 +84,17 @@ export function initCalendar() {
     }
   })
 
+/*   calendarEl.addEventListener('touchstart', (e) => {
+    alert('touchstart')
+    const cell = e.target.closest('.fc-daygrid-day')
+    if (!cell) return
+
+    const dateStr = cell.getAttribute('data-date')
+    if (!dateStr) return
+
+    showAddEventPopover({ dateStr: new Date(dateStr), jsEvent: e })
+  })
+ */  
   calendar.render()
 
   // перестроение при ресайзе

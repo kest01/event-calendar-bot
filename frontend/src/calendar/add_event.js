@@ -1,4 +1,4 @@
-import { hideElement, showElement } from "../utils"
+import { getEventCoordinates, hideElement, showElement } from "../utils"
 
 const popover = document.getElementById('add-event-popover')
 const modal = document.getElementById('event-modal')
@@ -15,10 +15,12 @@ var selectedDate
 export function showAddEventPopover(info) {
   selectedDate = info.dateStr
 
-  const mouseEvent = info.jsEvent
+  const coord = getEventCoordinates(info.jsEvent)
   popover.hidden = false
-  popover.style.top = `${mouseEvent.clientY + 8}px`
-  popover.style.left = `${mouseEvent.clientX + 8}px`
+  popover.style.top = `${coord.clientY + 8}px`
+  popover.style.left = `${coord.clientX + 8}px`
+
+  console.log(coord)
 }
 
 export function initAddEventModal(calendar) {
@@ -43,7 +45,7 @@ export function initAddEventModal(calendar) {
     placeInput.value = ''
     photoInput.value = ''
 
-    showElement(modal)
+    showElement(modal, 'flex')
   })
 
   document.getElementById('save-btn').onclick = async () => {
@@ -119,7 +121,7 @@ export function editEvent(event) {
   placeInput.value = event.extendedProps.place
   photoInput.value = event.extendedProps.photo
 
-  showElement(modal)
+  showElement(modal, 'flex')
 }
 
 function isValidTime(value) {

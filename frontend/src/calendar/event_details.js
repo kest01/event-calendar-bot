@@ -41,7 +41,7 @@ export function openEventDetails(event) {
     detailsImg.hidden = true
   }
 
-  showElement(eventDetailsModel)
+  showElement(eventDetailsModel, 'flex')
 }
 
 export function closeEventDetails() {
