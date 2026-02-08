@@ -1,9 +1,11 @@
 import sqlite3 from "sqlite3"; 
 import path from 'path'
 import { currentDir } from './utils.js'
+import 'dotenv/config'
 
 sqlite3.verbose();
-const __dirname = currentDir()
+
+const __dirname = process.env.LOCAL ? currentDir() : ""
 
 export const db = new sqlite3.Database(
   path.join(__dirname + '/data', 'db.sqlite')
