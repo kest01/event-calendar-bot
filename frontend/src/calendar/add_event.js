@@ -23,7 +23,7 @@ export function showAddEventPopover(info) {
   console.log(coord)
 }
 
-export function initAddEventModal(calendar) {
+export function initAddEventModal(calendar, userContext) {
   document.addEventListener('click', e => {
     if (!popover.contains(e.target)) {
       popover.hidden = true
@@ -52,10 +52,12 @@ export function initAddEventModal(calendar) {
     
     const payload = {
       id: idInput.value,
+      group_id: userContext.groupId,
       title: titleInput.value,
       description: descInput.value,
       place: placeInput.value,
       photo: photoInput.value,
+      owner_id: userContext.userId
     }
 
     if (!payload.title) {

@@ -7,8 +7,12 @@ tg.expand()
 
 // Пользователь
 const user = tg.initDataUnsafe?.user
-document.getElementById('user').innerText =
-  user ? `Привет, ${user.first_name}` : 'Привет 👋'
+console.log(tg.initDataUnsafe)
 
+document.getElementById('user').innerText = user ? `Привет, ${user.first_name}` : 'Привет 👋'
 // Календарь
-initCalendar()
+initCalendar({
+  userId: user?.id,
+  groupId: tg.initDataUnsafe?.chat?.id,
+  avatarUrl: user?.photo_url
+})

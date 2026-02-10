@@ -20,7 +20,9 @@ db.serialize(() => {
       title TEXT NOT NULL,
       description TEXT,
       place TEXT,
-      photo TEXT
+      photo TEXT,
+      owner_id TEXT,
+      created_at TEXT DEFAULT CURRENT_TIMESTAMP
     )
   `)
   console.log('Database is created and connected')

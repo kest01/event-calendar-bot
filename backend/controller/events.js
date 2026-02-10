@@ -22,8 +22,10 @@ export function getEvents(req, res) {
         title: row.title,
         start_time: row.start_time,
         description: row.description,
-        place: row.place,         
-        photo: row.photo         
+        place: row.place,
+        photo: row.photo,
+        owner_id: row.owner_id,
+        created_at: row.created_at
       }))
 
       res.json(events)
@@ -33,21 +35,22 @@ export function getEvents(req, res) {
 
 export function saveEvent(req, res) {
   console.log('Save event ' + JSON.stringify(req.body))
-  const { id, group_id, title, start_time, description, place, photo } = req.body
+  const { id, group_id, title, start_time, description, place, photo, owner_id } = req.body
 
   if (id) {
     db.run(
       `
-      UPDATE events SET 
-        group_id = ?, 
-        title = ?, 
-        start_time = ?, 
-        description = ?, 
-        place = ?, 
-        photo = ?
+      UPDATE events SET
+        group_id = ?,
+        title = ?,
+        start_time = ?,
+        description = ?,
+        place = ?,
+        photo = ?,
+        owner_id = ?
       WHERE id = ?
       `,
-      [group_id, title, start_time, description, place, photo, id],
+      [group_id, title, start_time, description, place, photo, owner_id, id],
       function (err) {
         if (err) {
           return res.status(500).json({ error: err.message })
@@ -59,10 +62,10 @@ export function saveEvent(req, res) {
   } else {
     db.run(
       `
-      INSERT INTO events (group_id, title, start_time, description, place, photo)
-      VALUES (?, ?, ?, ?, ?, ?)
+      INSERT INTO events (group_id, title, start_time, description, place, photo, owner_id, created_at)
+      VALUES (?, ?, ?, ?, ?, ?, ?, datetime('now'))
       `,
-      [group_id, title, start_time, description, place, photo],
+      [group_id, title, start_time, description, place, photo, owner_id],
       function (err) {
         if (err) {
           return res.status(500).json({ error: err.message })

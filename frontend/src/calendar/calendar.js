@@ -5,7 +5,7 @@ import { showEventTooltip, hideEventTooltip } from './event_tooltip'
 import { showAddEventPopover, initAddEventModal, closeAddEventModal } from './add_event'
 import { openEventDetails, closeEventDetails, initEventDetailsModal } from './event_details'
 
-export function initCalendar() {
+export function initCalendar(userContext) {
   const calendarEl = document.getElementById('calendar')
 
   const calendar = new Calendar(calendarEl, {
@@ -33,7 +33,8 @@ export function initCalendar() {
     events: async (info, successCallback, failureCallback) => {
       try {
         const params = new URLSearchParams({
-          start_time: info.startStr
+          start_time: info.startStr,
+          group_id: userContext.groupId
         })
 
         const response = await fetch(
@@ -84,17 +85,6 @@ export function initCalendar() {
     }
   })
 
-/*   calendarEl.addEventListener('touchstart', (e) => {
-    alert('touchstart')
-    const cell = e.target.closest('.fc-daygrid-day')
-    if (!cell) return
-
-    const dateStr = cell.getAttribute('data-date')
-    if (!dateStr) return
-
-    showAddEventPopover({ dateStr: new Date(dateStr), jsEvent: e })
-  })
- */  
   calendar.render()
 
   // перестроение при ресайзе
@@ -110,7 +100,7 @@ export function initCalendar() {
     )
   })
 
-  initAddEventModal(calendar)
+  initAddEventModal(calendar, userContext)
   initEventDetailsModal()
 
   document.addEventListener('keydown', (e) => {
