@@ -11,8 +11,11 @@ console.log(tg.initDataUnsafe)
 
 document.getElementById('user').innerText = user ? `Привет, ${user.first_name}` : 'Привет 👋'
 // Календарь
-initCalendar({
-  userId: user?.id,
-  groupId: tg.initDataUnsafe?.chat?.id,
-  avatarUrl: user?.photo_url
-})
+const userContext = {
+  userId: user?.id ?? null,
+  groupId: tg.initDataUnsafe?.chat?.id ?? null,
+  avatarUrl: user?.photo_url ?? null
+}
+
+console.log(userContext)
+initCalendar(userContext)

@@ -33,9 +33,11 @@ export function initCalendar(userContext) {
     events: async (info, successCallback, failureCallback) => {
       try {
         const params = new URLSearchParams({
-          start_time: info.startStr,
-          group_id: userContext.groupId
+          start_time: info.startStr
         })
+        if (userContext.groupId) {
+          params.append("group_id", userContext.groupId)
+        }
 
         const response = await fetch(
           `/api/events?${params}`
