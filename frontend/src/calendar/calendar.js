@@ -103,7 +103,7 @@ export function initCalendar(userContext) {
   })
 
   initAddEventModal(calendar, userContext)
-  initEventDetailsModal()
+  initEventDetailsModal(userContext)
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && !document.getElementById('event-details-modal').hidden) {

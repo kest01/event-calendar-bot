@@ -16,8 +16,18 @@ if (!chat_id || chat_id.startsWith('-')) {
 
 // TODO Переделать приветствие в зависимости от настроек канала
 document.getElementById('user').innerText = user ? `Привет, ${user.first_name}` : 'Привет 👋'
-// Календарь
-const userContext = {
+// TODO Только для отладки в браузере, удалить
+const userContext = !user ?
+{
+  userId: 222,
+  groupId: null,
+  avatarUrl: 'https://t.me/i/userpic/320/TRhlIjhDlQ2pjoEa8PokGjZIn0fHz7FfGUMO63mTbyc.svg',
+  user: {
+    id: 222,
+    first_name: "Konstantin",
+    last_name: "Kharitonov"
+  }
+} : {
   userId: user?.id ?? null,
   groupId: chat_id,
   avatarUrl: user?.photo_url ?? null,
@@ -25,4 +35,5 @@ const userContext = {
 }
 
 console.log(userContext)
+// Календарь
 initCalendar(userContext)

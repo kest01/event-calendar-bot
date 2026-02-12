@@ -25,6 +25,33 @@ db.serialize(() => {
       created_at TEXT DEFAULT CURRENT_TIMESTAMP
     )
   `)
+  
+  db.run(`
+    CREATE TABLE IF NOT EXISTS event_participants (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      event_id INTEGER NOT NULL,
+      user_id TEXT NOT NULL,
+      first_name TEXT,
+      last_name TEXT,
+      avatar_url TEXT,
+      participation_type TEXT NOT NULL CHECK(participation_type IN ('maybe', 'sure')),
+      created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+      updated_at TEXT DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (event_id) REFERENCES events(id) ON DELETE CASCADE,
+      UNIQUE(event_id, user_id)
+    )
+  `)
+  
+  db.run(`
+    CREATE INDEX IF NOT EXISTS idx_event_participants_event_id
+    ON event_participants(event_id)
+  `)
+  
+  db.run(`
+    CREATE INDEX IF NOT EXISTS idx_event_participants_user_id
+    ON event_participants(user_id)
+  `)
+  
   console.log('Database is created and connected')
 })
 

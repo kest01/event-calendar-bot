@@ -59,3 +59,91 @@
 .event-details-edit-btn:active {
   transform: scale(0.95);
 }
+
+/* Участники */
+.participants-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  background: color-mix(
+    in srgb,
+    var(--tg-theme-hint-color) 8%,
+    transparent
+  );
+  border-radius: 8px;
+}
+
+.participants-header {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--tg-theme-hint-color);
+}
+
+.participants-avatars {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.participant-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--tg-theme-bg-color);
+  background: var(--tg-theme-hint-color);
+  color: var(--tg-theme-bg-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.participant-avatar:hover {
+  transform: scale(1.1);
+  z-index: 1;
+}
+
+.participant-avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Стили для кнопок участия */
+#event-details-modal .modal-actions {
+  display: flex;
+  gap: 8px;
+}
+
+#event-details-modal .modal-actions .btn {
+  flex: 1;
+  position: relative;
+  transition: all 0.2s;
+}
+
+#event-details-modal .modal-actions .btn.selected {
+  background: var(--tg-theme-button-color);
+  color: var(--tg-theme-button-text-color);
+  border-color: var(--tg-theme-button-color);
+  font-weight: 600;
+}
+
+#event-details-modal .modal-actions .btn.selected.btn-secondary {
+  background: var(--tg-theme-button-color);
+  opacity: 0.85;
+}
+
+#event-details-modal .modal-actions .btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+#event-details-modal .modal-actions .btn:not(.selected):not(:disabled):hover {
+  opacity: 0.8;
+}

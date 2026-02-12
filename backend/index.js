@@ -4,6 +4,12 @@ import cors from 'cors'
 import 'dotenv/config'
 import './bot.js'
 import { getEvents, saveEvent } from './controller/events.js'
+import {
+  getEventParticipants,
+  getUserParticipation,
+  setUserParticipation,
+  removeUserParticipation
+} from './controller/participants.js'
 import { currentDir } from './utils.js'
 
 const __dirname = currentDir()
@@ -23,6 +29,12 @@ if (process.env.FRONTEND_ENABLED) {
 
 app.get('/api/events', getEvents)
 app.post('/api/events', saveEvent)
+
+// Participation endpoints
+app.get('/api/events/:event_id/participants', getEventParticipants)
+app.get('/api/events/:event_id/participants/:user_id', getUserParticipation)
+app.post('/api/participants', setUserParticipation)
+app.delete('/api/events/:event_id/participants/:user_id', removeUserParticipation)
 
 const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {
