@@ -128,22 +128,17 @@
 }
 
 #event-details-modal .modal-actions .btn.selected {
-  background: var(--tg-theme-button-color);
+  background: var(--tg-theme-button-color, #2ea6ff);
   color: var(--tg-theme-button-text-color);
-  border-color: var(--tg-theme-button-color);
-  font-weight: 600;
+  border-color: var(--tg-theme-button-color, #2ea6ff);
+  /* font-weight: 600; */
 }
 
-#event-details-modal .modal-actions .btn.selected.btn-secondary {
-  background: var(--tg-theme-button-color);
+ #event-details-modal .modal-actions .btn:not(.selected) {
+  background: var(--tg-theme-bg-color, #fff);
   opacity: 0.85;
 }
 
-#event-details-modal .modal-actions .btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-#event-details-modal .modal-actions .btn:not(.selected):not(:disabled):hover {
+#event-details-modal .modal-actions .btn:hover {
   opacity: 0.8;
 }

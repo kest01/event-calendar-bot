@@ -6,7 +6,6 @@ import './bot.js'
 import { getEvents, saveEvent } from './controller/events.js'
 import {
   getEventParticipants,
-  getUserParticipation,
   setUserParticipation,
   removeUserParticipation
 } from './controller/participants.js'
@@ -32,7 +31,6 @@ app.post('/api/events', saveEvent)
 
 // Participation endpoints
 app.get('/api/events/:event_id/participants', getEventParticipants)
-app.get('/api/events/:event_id/participants/:user_id', getUserParticipation)
 app.post('/api/participants', setUserParticipation)
 app.delete('/api/events/:event_id/participants/:user_id', removeUserParticipation)
 

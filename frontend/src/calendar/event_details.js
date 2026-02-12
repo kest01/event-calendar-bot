@@ -141,16 +141,12 @@ function updateParticipationButtons() {
   // Сбрасываем состояние кнопок
   maybeBtn.classList.remove('selected')
   sureBtn.classList.remove('selected')
-  maybeBtn.disabled = false
-  sureBtn.disabled = false
   
   // Устанавливаем активную кнопку и отключаем другую
   if (currentUserParticipation === 'maybe') {
     maybeBtn.classList.add('selected')
-    maybeBtn.disabled = true
   } else if (currentUserParticipation === 'sure') {
     sureBtn.classList.add('selected')
-    sureBtn.disabled = true
   }
 }
 
@@ -164,21 +160,28 @@ async function handleParticipationClick(participationType) {
   const eventId = currentEvent.id
   
   try {
-    // Отправляем запрос на сервер
-    const response = await fetch('/api/participants', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        event_id: eventId,
-        user_id: userContext.userId,
-        first_name: userContext.user?.first_name || 'User',
-        last_name: userContext.user?.last_name || '',
-        avatar_url: userContext.avatarUrl || null,
-        participation_type: participationType
+    // Удаление пользователя из списка
+    let response
+    if (currentUserParticipation == participationType) {
+      response = await fetch(`/api/events/${eventId}/participants/${userContext.userId}`, {
+        method: 'DELETE',
       })
-    })
+    } else { // Добавление пользователя в список
+      response = await fetch('/api/participants', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          event_id: eventId,
+          user_id: userContext.userId,
+          first_name: userContext.user?.first_name || 'User',
+          last_name: userContext.user?.last_name || '',
+          avatar_url: userContext.avatarUrl || null,
+          participation_type: participationType
+        })
+      })
+    }
     
     if (!response.ok) {
       throw new Error('Failed to update participation')
@@ -186,9 +189,6 @@ async function handleParticipationClick(participationType) {
         
     // Перезагружаем список участников
     await loadParticipants(eventId)
-
-        // Обновляем локальное состояние
-    currentUserParticipation = participationType
     updateParticipationButtons()
     
   } catch (error) {

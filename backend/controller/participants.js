@@ -40,7 +40,7 @@ export function getEventParticipants(req, res) {
           avatar_url: row.avatar_url
         }
 
-        if (row.participation_type === 'mayby') {
+        if (row.participation_type === 'maybe') {
           participants.maybe.push(participant)
         } else if (row.participation_type === 'sure') {
           participants.sure.push(participant)
@@ -48,47 +48,6 @@ export function getEventParticipants(req, res) {
       })
 
       res.json(participants)
-    }
-  )
-}
-
-// TODO Удалить
-// Получить статус участия конкретного пользователя в событии
-export function getUserParticipation(req, res) {
-  const { event_id, user_id } = req.params
-
-  db.get(
-    `
-    SELECT 
-      id,
-      event_id,
-      user_id,
-      first_name,
-      last_name,
-      avatar_url,
-      participation_type
-    FROM event_participants
-    WHERE event_id = ? AND user_id = ?
-    `,
-    [event_id, user_id],
-    (err, row) => {
-      if (err) {
-        console.error(err.message)
-        return res.status(500).json({ error: err.message })
-      }
-
-      if (!row) {
-        return res.status(404).json({ error: 'Participation not found' })
-      }
-
-      res.json({
-        id: row.id,
-        user_id: row.user_id,
-        first_name: row.first_name,
-        last_name: row.last_name,
-        avatar_url: row.avatar_url,
-        participation_type: row.participation_type
-      })
     }
   )
 }
