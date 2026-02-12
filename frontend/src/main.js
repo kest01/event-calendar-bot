@@ -20,7 +20,7 @@ document.getElementById('user').innerText = user ? `Привет, ${user.first_n
 const userContext = !user ?
 {
   userId: 222,
-  groupId: null,
+  groupId: '3259485766946657054',
   avatarUrl: 'https://t.me/i/userpic/320/TRhlIjhDlQ2pjoEa8PokGjZIn0fHz7FfGUMO63mTbyc.svg',
   user: {
     id: 222,

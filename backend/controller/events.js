@@ -7,7 +7,7 @@ export function getEvents(req, res) {
     `
     SELECT *
     FROM events
-    WHERE start_time >= ? AND group_id ${group_id ? '=?' + group_id : 'is NULL'} 
+    WHERE start_time >= ? AND group_id ${group_id ? '=?' : 'is NULL'} 
     `,
     [start_time, group_id],
     (err, rows) => {
