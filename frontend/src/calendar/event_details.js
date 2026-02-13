@@ -40,6 +40,8 @@ export async function openEventDetails(event) {
   document.getElementById('details-date').textContent = event.extendedProps.date
   document.getElementById('details-time').textContent = event.extendedProps.time
 
+  document.getElementById('details-edit-btn').hidden = !isEventEditAllowed(currentEvent)
+
   if (event.extendedProps.place) {
    document.getElementById('details-place').textContent = event.extendedProps.place
    showElement(document.getElementById('details-place-block'))
@@ -195,4 +197,12 @@ async function handleParticipationClick(participationType) {
     console.error('Error updating participation:', error)
     alert('Не удалось обновить статус участия')
   }
+}
+
+function isEventEditAllowed(event) {
+  console.log("Event: ", event.extendedProps)
+  console.log("userContext: ", userContext)
+  console.log("result: ", (event.extendedProps.ownerId == userContext.userId))
+  return (event.extendedProps.ownerId == userContext.userId) 
+  || (userContext.admins && userContext.admins.includes(userContext.userId))
 }

@@ -24,6 +24,10 @@
   font-size: 15px;
 }
 
+button[hidden] {
+  display: none;
+}
+
 .event-details-edit-btn {
   position: absolute;
   top: 16px;

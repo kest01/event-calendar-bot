@@ -52,6 +52,21 @@ db.serialize(() => {
     ON event_participants(user_id)
   `)
   
+  db.run(`
+    CREATE TABLE IF NOT EXISTS groups (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      group_id TEXT NOT NULL UNIQUE,
+      title TEXT NOT NULL,
+      admins TEXT,
+      created_at TEXT DEFAULT CURRENT_TIMESTAMP
+    )
+  `)
+  
+  db.run(`
+    CREATE INDEX IF NOT EXISTS idx_groups_group_id
+    ON groups(group_id)
+  `)
+  
   console.log('Database is created and connected')
 })
 

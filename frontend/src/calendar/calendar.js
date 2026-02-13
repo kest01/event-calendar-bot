@@ -53,6 +53,7 @@ export function initCalendar(userContext) {
               description: event.description,
               place: event.place,
               photo: event.photo,
+              ownerId: event.owner_id,
             }
           })
         )

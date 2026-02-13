@@ -9,13 +9,8 @@ console.log(tg.initDataUnsafe)
 
 // Пользователь
 const user = tg.initDataUnsafe?.user ?? null
-let chat_id = tg.initDataUnsafe?.chat_instance
-if (!chat_id || chat_id.startsWith('-')) {
-  chat_id = user?.id || null
-}
+const chat_id = tg.initDataUnsafe?.chat_instance || null
 
-// TODO Переделать приветствие в зависимости от настроек канала
-document.getElementById('user').innerText = user ? `Привет, ${user.first_name}` : 'Привет 👋'
 // TODO Только для отладки в браузере, удалить
 const userContext = !user ?
 {
@@ -35,5 +30,60 @@ const userContext = !user ?
 }
 
 console.log(userContext)
-// Календарь
-initCalendar(userContext)
+
+// Загрузка информации о группе и инициализация календаря
+async function initApp() {
+  try {
+    let groupInfo = null
+    
+    // Загружаем информацию о группе, если есть groupId
+    if (userContext.groupId) {
+      const response = await fetch(`/api/groups/${userContext.groupId}`)
+      if (response.ok) {
+        groupInfo = await response.json()
+        console.log('Group info loaded:', groupInfo)
+        
+        // Обновляем приветствие с названием группы
+        document.getElementById('title').innerText = groupInfo.title || 'Привет 👋'
+      } else {
+        console.warn('Group not found, using default greeting')
+        addTitleForUser(userContext.groupId, user)
+      }
+    } else {
+      addTitleForUser(userContext.groupId, user)
+    }
+    
+    // Добавляем информацию о группе в контекст
+    const extendedContext = {
+      ...userContext,
+      ...groupInfo
+    }
+    
+    // Инициализируем календарь
+    initCalendar(extendedContext)
+  } catch (error) {
+    console.error('Error initializing app:', error)
+    // В случае ошибки все равно инициализируем календарь
+    addTitleForUser(userContext.groupId, userContext.user)
+    initCalendar(userContext)
+  }
+}
+
+// Запуск приложения
+initApp()
+
+function isPersonalChar(chat_id) {
+  return !chat_id || chat_id.startsWith('-');
+}
+
+function addTitleText(text) {
+  document.getElementById('title').innerText = text
+}
+
+function addTitleForUser(groupId, user) {
+  if (isPersonalChar(groupId)) {
+    addTitleText(user ? `Личный календарь ${user.first_name} ${user.last_name}` : 'Привет 👋')
+  } else {
+    addTitleText('Календарь мероприятий')
+  }
+}
