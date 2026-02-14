@@ -1,6 +1,16 @@
 #event-details-modal .modal-content {
   width: 320px;
   gap: 14px;
+  max-height: 90vh;
+  max-height: 90svh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Улучшенная прокрутка на мобильных */
+#event-details-modal .modal-content {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
 }
 
 .event-meta {
@@ -28,10 +38,18 @@ button[hidden] {
   display: none;
 }
 
-.event-details-edit-btn {
+.event-details-header-buttons {
+  position: sticky;
+  top: 0;
+  height: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.event-details-close-btn {
   position: absolute;
-  top: 16px;
-  right: 16px;
+  top: 0;
+  right: 0;
 
   width: 28px;
   height: 28px;
@@ -39,7 +57,43 @@ button[hidden] {
   border-radius: 8px;
   border: none;
 
-  background: transparent;
+  background: var(--overlay-bg, var(--tg-theme-secondary-bg-color));
+  color: var(--tg-theme-text-color);
+
+  font-size: 20px;
+  line-height: 1;
+
+  display: grid;
+  place-items: center;
+
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.event-details-close-btn:hover {
+  background: color-mix(
+    in srgb,
+    var(--tg-theme-hint-color) 12%,
+    var(--overlay-bg, var(--tg-theme-secondary-bg-color))
+  );
+}
+
+.event-details-close-btn:active {
+  transform: scale(0.95);
+}
+
+.event-details-edit-btn {
+  position: absolute;
+  top: 0;
+  right: 36px;
+
+  width: 28px;
+  height: 28px;
+
+  border-radius: 8px;
+  border: none;
+
+  background: var(--overlay-bg, var(--tg-theme-secondary-bg-color));
   color: var(--tg-theme-button-color);
 
   font-size: 14px;
@@ -49,6 +103,7 @@ button[hidden] {
   place-items: center;
 
   cursor: pointer;
+  pointer-events: auto;
 }
 
 /* Hover / active */
@@ -56,7 +111,7 @@ button[hidden] {
   background: color-mix(
     in srgb,
     var(--tg-theme-button-color) 12%,
-    transparent
+    var(--overlay-bg, var(--tg-theme-secondary-bg-color))
   );
 }
 

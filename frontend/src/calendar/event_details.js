@@ -20,6 +20,9 @@ export function initEventDetailsModal(context) {
     const overlay = eventDetailsModel.querySelector('.modal-overlay')
     overlay.addEventListener('click', closeEventDetails)
 
+    document.getElementById('details-close-btn')
+        .addEventListener('click', closeEventDetails)
+
     document.querySelector('.event-details-edit-btn')
         .addEventListener('click', (e) => {
             closeEventDetails()
