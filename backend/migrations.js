@@ -13,7 +13,7 @@ const initialGroups = [
 function updateSchema() {
   console.log('Начало обновления схемы данных...')
   
-  db.run(
+/*   db.run(
     `
     ALTER TABLE event_participants ADD COLUMN username TEXT;
     `,
@@ -28,7 +28,7 @@ function updateSchema() {
       }
     }
   )
-  
+ */  
   console.log('Обновления схемы данных завершено')
 }
 

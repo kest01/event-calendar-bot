@@ -188,7 +188,7 @@ button[hidden] {
 
 #event-details-modal .modal-actions .btn.selected {
   background: var(--tg-theme-button-color, #2ea6ff);
-  color: var(--tg-theme-button-text-color, #222222);
+  color: var(--tg-theme-button-text-color, #fff);
   border-color: var(--tg-theme-button-color, #2ea6ff);
   /* font-weight: 600; */
 }
