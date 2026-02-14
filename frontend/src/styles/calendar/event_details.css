@@ -57,7 +57,7 @@ button[hidden] {
   border-radius: 8px;
   border: none;
 
-  background: var(--overlay-bg, var(--tg-theme-secondary-bg-color));
+  background: var(--overlay-bg, var(--tg-theme-secondary-bg-color, #f5f5f5));
   color: var(--tg-theme-text-color);
 
   font-size: 20px;
@@ -74,7 +74,7 @@ button[hidden] {
   background: color-mix(
     in srgb,
     var(--tg-theme-hint-color) 12%,
-    var(--overlay-bg, var(--tg-theme-secondary-bg-color))
+    var(--overlay-bg, var(--tg-theme-secondary-bg-color, #f5f5f5))
   );
 }
 
@@ -93,7 +93,7 @@ button[hidden] {
   border-radius: 8px;
   border: none;
 
-  background: var(--overlay-bg, var(--tg-theme-secondary-bg-color));
+  background: var(--overlay-bg, var(--tg-theme-secondary-bg-color, #f5f5f5));
   color: var(--tg-theme-button-color);
 
   font-size: 14px;
@@ -111,7 +111,7 @@ button[hidden] {
   background: color-mix(
     in srgb,
     var(--tg-theme-button-color) 12%,
-    var(--overlay-bg, var(--tg-theme-secondary-bg-color))
+    var(--overlay-bg, var(--tg-theme-secondary-bg-color, #f5f5f5))
   );
 }
 
@@ -150,9 +150,9 @@ button[hidden] {
   height: 32px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid var(--tg-theme-bg-color);
+  border: 2px solid var(--tg-theme-bg-color, #fff);
   background: var(--tg-theme-hint-color);
-  color: var(--tg-theme-bg-color);
+  color: var(--tg-theme-bg-color, #fff);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -188,7 +188,7 @@ button[hidden] {
 
 #event-details-modal .modal-actions .btn.selected {
   background: var(--tg-theme-button-color, #2ea6ff);
-  color: var(--tg-theme-button-text-color);
+  color: var(--tg-theme-button-text-color, #222222);
   border-color: var(--tg-theme-button-color, #2ea6ff);
   /* font-weight: 600; */
 }
