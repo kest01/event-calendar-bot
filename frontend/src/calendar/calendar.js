@@ -14,6 +14,7 @@ export function initCalendar(userContext) {
     initialView: 'multiMonthYear',
     selectable: false,
     selectMirror: false,
+    firstDay: 1,
 
     views: {
       multiMonthYear: {
