@@ -9,6 +9,30 @@ const initialGroups = [
   }
 ]
 
+// Функция обновления схемы данных
+function updateSchema() {
+  console.log('Начало обновления схемы данных...')
+  
+  db.run(
+    `
+    ALTER TABLE event_participants ADD COLUMN username TEXT;
+    `,
+    [],
+    function(err) {
+      if (err) {
+        console.error(`Ошибка при обновлении схемы: `, err.message)
+      } else if (this.changes > 0) {
+        console.log(`Схема успешно обновлена`)
+      } else {
+        console.log(`Схема была обновлена ранее`)
+      }
+    }
+  )
+  
+  console.log('Обновления схемы данных завершено')
+}
+
+
 // Функция для загрузки начальных данных
 function seedGroups() {
   console.log('Начало загрузки начальных данных для таблицы groups...')
@@ -36,6 +60,11 @@ function seedGroups() {
 }
 
 // Запуск при импорте модуля
-seedGroups()
+function runMigrations() {
+  updateSchema()
+  seedGroups()
+}
 
-export { seedGroups }
+runMigrations()
+
+export { runMigrations }

@@ -3,7 +3,7 @@ import path from 'path'
 import cors from 'cors'
 import 'dotenv/config'
 import './bot.js'
-import './migrations.js'
+import { runMigrations } from './migrations.js'
 import { getEvents, saveEvent } from './controller/events.js'
 import {
   getEventParticipants,

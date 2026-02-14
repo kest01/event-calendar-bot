@@ -12,6 +12,7 @@ export function getEventParticipants(req, res) {
       user_id,
       first_name,
       last_name,
+      username, 
       avatar_url,
       participation_type
     FROM event_participants
@@ -37,6 +38,7 @@ export function getEventParticipants(req, res) {
           user_id: row.user_id,
           first_name: row.first_name,
           last_name: row.last_name,
+          username: row.username,
           avatar_url: row.avatar_url
         }
 
@@ -55,7 +57,7 @@ export function getEventParticipants(req, res) {
 // Создать или обновить статус участия пользователя
 export function setUserParticipation(req, res) {
   console.log('setUserParticipation: ' + JSON.stringify(req.body))
-  const { event_id, user_id, first_name, last_name, avatar_url, participation_type } = req.body
+  const { event_id, user_id, first_name, last_name, username, avatar_url, participation_type } = req.body
 
   // Валидация обязательных полей
   if (!event_id || !user_id || !participation_type) {
@@ -89,12 +91,13 @@ export function setUserParticipation(req, res) {
           SET 
             first_name = ?,
             last_name = ?,
+            username = ?,
             avatar_url = ?,
             participation_type = ?,
             updated_at = datetime('now')
           WHERE event_id = ? AND user_id = ?
           `,
-          [first_name, last_name, avatar_url, participation_type, event_id, user_id],
+          [first_name, last_name, username, avatar_url, participation_type, event_id, user_id],
           function (err) {
             if (err) {
               console.error(err.message)
@@ -107,6 +110,7 @@ export function setUserParticipation(req, res) {
               user_id,
               first_name,
               last_name,
+              username,
               avatar_url,
               participation_type,
               updated: true
@@ -118,10 +122,10 @@ export function setUserParticipation(req, res) {
         db.run(
           `
           INSERT INTO event_participants 
-            (event_id, user_id, first_name, last_name, avatar_url, participation_type, created_at, updated_at)
-          VALUES (?, ?, ?, ?, ?, ?, datetime('now'), datetime('now'))
+            (event_id, user_id, first_name, last_name, username, avatar_url, participation_type, created_at, updated_at)
+          VALUES (?, ?, ?, ?, ?, ?, ?, datetime('now'), datetime('now'))
           `,
-          [event_id, user_id, first_name, last_name, avatar_url, participation_type],
+          [event_id, user_id, first_name, last_name, username, avatar_url, participation_type],
           function (err) {
             if (err) {
               console.error(err.message)
@@ -134,6 +138,7 @@ export function setUserParticipation(req, res) {
               user_id,
               first_name,
               last_name,
+              username,
               avatar_url,
               participation_type,
               created: true

@@ -116,6 +116,17 @@ function renderParticipants(participants, container) {
     avatarDiv.className = 'participant-avatar'
     avatarDiv.title = `${participant.first_name} ${participant.last_name || ''}`.trim()
     
+    // Добавляем обработчик клика для открытия профиля в Telegram
+    if (participant.user_id) {
+      avatarDiv.style.cursor = 'pointer'
+      avatarDiv.addEventListener('click', () => {
+        console.log('Open user profile ', participant.username)
+        if (participant.username) {
+          window.open(`tg://resolve?domain=${participant.username}`, '_blank')
+        }
+      })
+    }
+    
     if (participant.avatar_url) {
       const img = document.createElement('img')
       img.src = participant.avatar_url
@@ -179,6 +190,7 @@ async function handleParticipationClick(participationType) {
           user_id: userContext.userId,
           first_name: userContext.user?.first_name || 'User',
           last_name: userContext.user?.last_name || '',
+          username: userContext.user?.username || '',
           avatar_url: userContext.avatarUrl || null,
           participation_type: participationType
         })

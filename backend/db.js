@@ -33,6 +33,7 @@ db.serialize(() => {
       user_id TEXT NOT NULL,
       first_name TEXT,
       last_name TEXT,
+      username TEXT,
       avatar_url TEXT,
       participation_type TEXT NOT NULL CHECK(participation_type IN ('maybe', 'sure')),
       created_at TEXT DEFAULT CURRENT_TIMESTAMP,

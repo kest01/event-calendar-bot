@@ -14,13 +14,14 @@ const chat_id = tg.initDataUnsafe?.chat_instance || null
 // TODO Только для отладки в браузере, удалить
 const userContext = !user ?
 {
-  userId: 222,
+  userId: 234436619,
   groupId: '3259485766946657054',
   avatarUrl: 'https://t.me/i/userpic/320/TRhlIjhDlQ2pjoEa8PokGjZIn0fHz7FfGUMO63mTbyc.svg',
   user: {
-    id: 222,
-    first_name: "Konstantin",
-    last_name: "Kharitonov"
+    id: 234436619,
+    first_name: 'Konstanti',
+    last_name: 'Kharitonov',
+    username: 'kest_ru'
   }
 } : {
   userId: user?.id ?? null,
