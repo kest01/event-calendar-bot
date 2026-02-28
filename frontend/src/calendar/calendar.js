@@ -86,6 +86,11 @@ export function initCalendar(userContext) {
       info.jsEvent.preventDefault()
       info.jsEvent.stopPropagation()
 
+      const morePopover = document.querySelector('.fc-more-popover')
+      if (morePopover) {
+        morePopover.remove()
+      }
+      
       openEventDetails(info.event)
     }
   })

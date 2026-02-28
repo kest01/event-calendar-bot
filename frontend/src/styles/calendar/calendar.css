@@ -24,6 +24,7 @@
 /* обычный день */
 .fc-daygrid-day-frame {
   background-color: var(--fc-day-bg);
+  min-height: 120px;
 }
 
 /* заголовок дня недели */
