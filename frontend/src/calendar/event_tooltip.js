@@ -4,7 +4,7 @@ export function showEventTooltip(info) {
   hideEventTooltip()
 
   const event = info.event
-  const { description, time, place, photo } = event.extendedProps
+  const { description, time, place, photo, eventType } = event.extendedProps
 
   tooltip = document.createElement('div')
   tooltip.className = 'fc-tooltip'
@@ -12,6 +12,7 @@ export function showEventTooltip(info) {
   tooltip.innerHTML = `
     ${photo ? `<img class="tooltip-photo" src="${photo}"/>` : ''}
     <strong>${event.title}</strong>
+    ${eventType ? `<div>Тип: ${eventType}</div>` : ''}
     ${place ? `<div>Место: ${place}</div>` : ''}
     ${time ? `<div>Время: ${time}</div>` : ''}
     ${description ? `<p>${description}</p>` : ''}

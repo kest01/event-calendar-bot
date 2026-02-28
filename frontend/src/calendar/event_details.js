@@ -38,6 +38,9 @@ export async function openEventDetails(event) {
   currentEvent = event
   document.getElementById('details-title').textContent = event.title
 
+  const eventType = event.extendedProps.eventType || 'Прочее'
+  document.getElementById('details-type').textContent = eventType
+
   document.getElementById('details-description').textContent = event.extendedProps.description
 
   document.getElementById('details-date').textContent = event.extendedProps.date

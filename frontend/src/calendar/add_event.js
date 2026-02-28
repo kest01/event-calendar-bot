@@ -9,6 +9,8 @@ const dateInput = document.getElementById('event-date')
 const timeInput = document.getElementById('event-time')
 const placeInput = document.getElementById('event-place')
 const photoInput = document.getElementById('event-photo')
+const eventTypeInput = document.getElementById('event-type')
+const eventTypeSelector = document.getElementById('event-type-selector')
 
 var selectedDate
 
@@ -33,6 +35,15 @@ export function initAddEventModal(calendar, userContext) {
   const overlay = modal.querySelector('.modal-overlay')
   overlay.addEventListener('click', closeAddEventModal)
   
+  // Инициализация выбора типа события
+  eventTypeSelector.querySelectorAll('.event-type-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      eventTypeSelector.querySelectorAll('.event-type-btn').forEach(b => b.classList.remove('selected'))
+      btn.classList.add('selected')
+      eventTypeInput.value = btn.dataset.value
+    })
+  })
+
 
   document.getElementById('add-event-btn').addEventListener('click', () => {
     popover.hidden = true
@@ -44,6 +55,8 @@ export function initAddEventModal(calendar, userContext) {
     timeInput.value = ''
     placeInput.value = ''
     photoInput.value = ''
+    eventTypeInput.value = 'Тренировка'
+    setEventType('Тренировка')
 
     showElement(modal, 'flex')
   })
@@ -57,7 +70,8 @@ export function initAddEventModal(calendar, userContext) {
       description: descInput.value,
       place: placeInput.value,
       photo: photoInput.value,
-      owner_id: userContext.userId
+      owner_id: userContext.userId,
+      event_type: eventTypeInput.value || 'Прочее',
     }
 
     if (!payload.title) {
@@ -122,8 +136,16 @@ export function editEvent(event) {
   timeInput.value = event.extendedProps.time
   placeInput.value = event.extendedProps.place
   photoInput.value = event.extendedProps.photo
+  setEventType(event.extendedProps.eventType || 'Прочее')
 
   showElement(modal, 'flex')
+}
+
+function setEventType(value) {
+  eventTypeSelector.querySelectorAll('.event-type-btn').forEach(btn => {
+    btn.classList.toggle('selected', btn.dataset.value === value)
+  })
+  eventTypeInput.value = value
 }
 
 function isValidTime(value) {

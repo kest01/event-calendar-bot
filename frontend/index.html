@@ -27,6 +27,16 @@
 
       <div class="form">
         <input id="event-id" type="text" hidden/>
+        <div class="field">
+          <span class="field-label">Тип события</span>
+          <div class="event-type-selector" id="event-type-selector">
+            <button type="button" class="event-type-btn" data-value="Тренировка">🏃 Тренировка</button>
+            <button type="button" class="event-type-btn" data-value="Встреча">🤝 Встреча</button>
+            <button type="button" class="event-type-btn" data-value="Клубный старт">🏁 Клубный старт</button>
+            <button type="button" class="event-type-btn" data-value="Прочее">📌 Прочее</button>
+          </div>
+          <input id="event-type" type="hidden" value="Тренировка" />
+        </div>
         <label class="field">
           <span class="field-label">Название</span>
           <input id="event-title" type="text" />
@@ -81,6 +91,10 @@
       <img id="details-photo" src="" hidden/>
 
       <div class="event-meta">
+        <div class="meta-row" id="details-type-block">
+          <span class="meta-label">Тип</span>
+          <span class="meta-value" id="details-type"></span>
+        </div>
         <div class="meta-row">
           <span class="meta-label">Когда</span>
           <span class="meta-value" id="details-date"></span>

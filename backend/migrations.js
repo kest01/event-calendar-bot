@@ -13,22 +13,24 @@ const initialGroups = [
 function updateSchema() {
   console.log('Начало обновления схемы данных...')
   
-/*   db.run(
-    `
-    ALTER TABLE event_participants ADD COLUMN username TEXT;
-    `,
+  db.run(
+    `ALTER TABLE events ADD COLUMN event_type TEXT NOT NULL DEFAULT 'Прочее'`,
     [],
     function(err) {
       if (err) {
-        console.error(`Ошибка при обновлении схемы: `, err.message)
-      } else if (this.changes > 0) {
-        console.log(`Схема успешно обновлена`)
+        // Если столбец уже существует — SQLite вернёт ошибку "duplicate column name"
+        // Это нормально, просто логируем
+        if (!err.message.includes('duplicate column name')) {
+          console.error('Ошибка при добавлении event_type:', err.message)
+        } else {
+          console.log('Столбец event_type уже существует')
+        }
       } else {
-        console.log(`Схема была обновлена ранее`)
+        console.log('Столбец event_type успешно добавлен')
       }
     }
   )
- */  
+  
   console.log('Обновления схемы данных завершено')
 }
 
