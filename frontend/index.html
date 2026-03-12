@@ -11,9 +11,27 @@
 <body>
   <header>
     <h2 id="title"></h2>
+    <div class="view-toggle">
+      <a href="#" id="toggle-view-link">События списком</a>
+    </div>
   </header>
 
   <div id="calendar"></div>
+
+  <div id="events-table-view" hidden>
+    <table class="events-table">
+      <thead>
+        <tr>
+          <th>Дата</th>
+          <th>Событие</th>
+          <th>Участники</th>
+        </tr>
+      </thead>
+      <tbody id="events-table-body">
+        <!-- Строки таблицы будут добавлены через JS -->
+      </tbody>
+    </table>
+  </div>
 
   <div id="add-event-popover" hidden>
     <button id="add-event-btn">Добавить событие</button>

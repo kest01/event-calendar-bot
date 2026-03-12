@@ -4,6 +4,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import { showEventTooltip, hideEventTooltip } from './event_tooltip'
 import { showAddEventPopover, initAddEventModal, closeAddEventModal } from './add_event'
 import { openEventDetails, closeEventDetails, initEventDetailsModal } from './event_details'
+import { initTableView, updateEventsCache } from './table_view'
 
 export function initCalendar(userContext) {
   const calendarEl = document.getElementById('calendar')
@@ -60,6 +61,10 @@ export function initCalendar(userContext) {
           })
         )
         // console.log(events)
+        
+        // Сохраняем события для табличного вида
+        updateEventsCache(events)
+        
         successCallback(events)
       } catch (e) {
         failureCallback(e)
@@ -112,6 +117,7 @@ export function initCalendar(userContext) {
 
   initAddEventModal(calendar, userContext)
   initEventDetailsModal(userContext)
+  initTableView()
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && !document.getElementById('event-details-modal').hidden) {
