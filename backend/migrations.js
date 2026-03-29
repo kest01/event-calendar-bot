@@ -3,9 +3,9 @@ import { db } from './db.js'
 // Начальные данные для таблицы groups
 const initialGroups = [
   {
-    group_id: '3259485766946657054',
-    title: 'Календарь событий тестового сообщества!',
-    admins: JSON.stringify([234436619])
+    group_id: '8090954990011115460',
+    title: 'Календарь событий Булочной №1',
+    admins: JSON.stringify([234436619, 797362624])
   }
 ]
 
@@ -13,7 +13,7 @@ const initialGroups = [
 function updateSchema() {
   console.log('Начало обновления схемы данных...')
   
-  db.run(
+/*   db.run(
     `ALTER TABLE events ADD COLUMN event_type TEXT NOT NULL DEFAULT 'Прочее'`,
     [],
     function(err) {
@@ -30,7 +30,7 @@ function updateSchema() {
       }
     }
   )
-  
+ */  
   console.log('Обновления схемы данных завершено')
 }
 
