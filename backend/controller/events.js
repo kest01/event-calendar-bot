@@ -79,3 +79,39 @@ export function saveEvent(req, res) {
     )
   }
 }
+
+export function deleteEvent(req, res) {
+  const { event_id } = req.params
+  
+  if (!event_id) {
+    return res.status(400).json({ error: 'event_id is required' })
+  }
+  
+  db.run(
+    `
+    DELETE FROM event_participants WHERE event_id = ?;
+    `,
+    [event_id],
+    (err, row) => {
+      if (err) {
+        console.error(err.message)
+        return res.status(500).json({ error: "event_participants: " + err.message })
+      }
+    }
+  )
+  
+  db.run(
+    `
+    DELETE FROM events WHERE id = ?;
+    `,
+    [event_id],
+    (err, row) => {
+      if (err) {
+        console.error(err.message)
+        return res.status(500).json({ error: err.message })
+      }
+      
+      res.json({ success: "Event is deleted"})
+    }
+  )
+}

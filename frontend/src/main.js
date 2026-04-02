@@ -5,17 +5,37 @@ const tg = window.Telegram.WebApp
 tg.ready()
 tg.expand()
 
-console.log(tg.initDataUnsafe)
+console.log("tg.initDataUnsafe: ", tg.initDataUnsafe)
+console.log("window.location.search: ", window.location.search)
+
+// Получаем group_id из URL параметров
+function getGroupIdFromUrl() {
+  const urlParams = new URLSearchParams(window.location.search)
+  return urlParams.get('group_id')
+}
 
 // Пользователь
 const user = tg.initDataUnsafe?.user ?? null
 const chat_id = tg.initDataUnsafe?.chat_instance || null
 
+// Приоритет для group_id:
+// 1. URL параметр group_id
+// 2. chat_instance из Telegram
+// 3. Значение по умолчанию для отладки
+const groupIdFromUrl = getGroupIdFromUrl()
+const groupId = groupIdFromUrl || chat_id || '3259485766946657054'
+
+console.log('Group ID источники:', {
+  fromUrl: groupIdFromUrl,
+  fromChatInstance: chat_id,
+  selected: groupId
+})
+
 // TODO Только для отладки в браузере, удалить
 const userContext = !user ?
 {
   userId: 234436619,
-  groupId: '3259485766946657054',
+  groupId: groupId,
   avatarUrl: 'https://t.me/i/userpic/320/TRhlIjhDlQ2pjoEa8PokGjZIn0fHz7FfGUMO63mTbyc.svg',
   user: {
     id: 234436619,
@@ -25,7 +45,7 @@ const userContext = !user ?
   }
 } : {
   userId: user?.id ?? null,
-  groupId: chat_id,
+  groupId: groupId,
   avatarUrl: user?.photo_url ?? null,
   user: user
 }

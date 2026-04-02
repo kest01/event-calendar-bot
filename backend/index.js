@@ -4,13 +4,13 @@ import cors from 'cors'
 import 'dotenv/config'
 import './bot.js'
 import { runMigrations } from './migrations.js'
-import { getEvents, saveEvent } from './controller/events.js'
+import { getEvents, saveEvent, deleteEvent } from './controller/events.js'
 import {
   getEventParticipants,
   setUserParticipation,
   removeUserParticipation
 } from './controller/participants.js'
-import { getGroupInfo } from './controller/groups.js'
+import { getGroupInfo, moveGroups } from './controller/groups.js'
 import { currentDir } from './utils.js'
 
 const __dirname = currentDir()
@@ -30,6 +30,7 @@ if (process.env.FRONTEND_ENABLED) {
 
 app.get('/api/events', getEvents)
 app.post('/api/events', saveEvent)
+app.delete('/api/events/:event_id', deleteEvent)
 
 // Participation endpoints
 app.get('/api/events/:event_id/participants', getEventParticipants)
@@ -38,6 +39,7 @@ app.delete('/api/events/:event_id/participants/:user_id', removeUserParticipatio
 
 // Groups endpoints
 app.get('/api/groups/:group_id', getGroupInfo)
+app.get('/api/move-groups', moveGroups)
 
 const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {
