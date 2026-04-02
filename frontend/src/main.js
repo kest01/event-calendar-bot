@@ -11,22 +11,19 @@ console.log("window.location.search: ", window.location.search)
 // Получаем group_id из URL параметров
 function getGroupIdFromUrl() {
   const urlParams = new URLSearchParams(window.location.search)
-  return urlParams.get('group_id')
+  return urlParams.get('tgWebAppStartParam')
 }
 
 // Пользователь
 const user = tg.initDataUnsafe?.user ?? null
 const chat_id = tg.initDataUnsafe?.chat_instance || null
 
-// Приоритет для group_id:
-// 1. URL параметр group_id
-// 2. chat_instance из Telegram
-// 3. Значение по умолчанию для отладки
-const groupIdFromUrl = getGroupIdFromUrl()
-const groupId = groupIdFromUrl || chat_id || '3259485766946657054'
+// const groupIdFromUrl = getGroupIdFromUrl()
+// const groupId = groupIdFromUrl || chat_id || '3259485766946657054'
+const groupId = getGroupIdFromUrl()
 
 console.log('Group ID источники:', {
-  fromUrl: groupIdFromUrl,
+  // fromUrl: groupIdFromUrl,
   fromChatInstance: chat_id,
   selected: groupId
 })
@@ -71,7 +68,8 @@ async function initApp() {
         addTitleForUser(userContext.groupId, user)
       }
     } else {
-      addTitleForUser(userContext.groupId, user)
+      // addTitleForUser(userContext.groupId, user)
+      addTitleText('Запустите календарь по ссылке в группе')
     }
     
     // Добавляем информацию о группе в контекст
