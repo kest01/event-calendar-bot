@@ -70,6 +70,7 @@ async function initApp() {
     } else {
       // addTitleForUser(userContext.groupId, user)
       addTitleText('Запустите календарь по ссылке в группе')
+      return
     }
     
     // Добавляем информацию о группе в контекст
