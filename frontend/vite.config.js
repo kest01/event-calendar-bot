@@ -8,7 +8,8 @@ export default defineConfig({
     outDir: path.resolve(__dirname, '../dist/frontend'),
     emptyOutDir: true
   },
-    server: {
+  server: {
+    host: '127.0.0.1',
     proxy: {
       // Proxy requests that start with '/api'
       '/api': {
