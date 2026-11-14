@@ -34,6 +34,16 @@
   font-size: 15px;
 }
 
+.meta-value a {
+  color: var(--tg-theme-button-color, #2ea6ff);
+  text-decoration: none;
+  word-break: break-all;
+}
+
+.meta-value a:hover {
+  text-decoration: underline;
+}
+
 button[hidden] {
   display: none;
 }

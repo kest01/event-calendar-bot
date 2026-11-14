@@ -57,6 +57,7 @@ export function initCalendar(userContext) {
               photo: event.photo,
               ownerId: event.owner_id,
               eventType: event.event_type,
+              link: event.link,
             }
           })
         )

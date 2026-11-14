@@ -54,6 +54,15 @@ export async function openEventDetails(event) {
   } else {
    hideElement(document.getElementById('details-place-block'))
   }
+  if (event.extendedProps.link) {
+    const linkEl = document.getElementById('details-link')
+    linkEl.textContent = event.extendedProps.link
+    linkEl.href = event.extendedProps.link
+    showElement(document.getElementById('details-link-block'))
+  } else {
+    hideElement(document.getElementById('details-link-block'))
+  }
+
   if (event.extendedProps.photo) {
     detailsImg.src = event.extendedProps.photo
     detailsImg.hidden = false

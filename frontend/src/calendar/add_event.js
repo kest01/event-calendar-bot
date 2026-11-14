@@ -9,6 +9,7 @@ const dateInput = document.getElementById('event-date')
 const timeInput = document.getElementById('event-time')
 const placeInput = document.getElementById('event-place')
 const photoInput = document.getElementById('event-photo')
+const linkInput = document.getElementById('event-link')
 const eventTypeInput = document.getElementById('event-type')
 const eventTypeSelector = document.getElementById('event-type-selector')
 
@@ -55,6 +56,7 @@ export function initAddEventModal(calendar, userContext) {
     timeInput.value = ''
     placeInput.value = ''
     photoInput.value = ''
+    linkInput.value = ''
     eventTypeInput.value = 'Тренировка'
     setEventType('Тренировка')
 
@@ -70,6 +72,7 @@ export function initAddEventModal(calendar, userContext) {
       description: descInput.value,
       place: placeInput.value,
       photo: photoInput.value,
+      link: linkInput.value,
       owner_id: userContext.userId,
       event_type: eventTypeInput.value || 'Прочее',
     }
@@ -136,6 +139,7 @@ export function editEvent(event) {
   timeInput.value = event.extendedProps.time
   placeInput.value = event.extendedProps.place
   photoInput.value = event.extendedProps.photo
+  linkInput.value = event.extendedProps.link || ''
   setEventType(event.extendedProps.eventType || 'Прочее')
 
   showElement(modal, 'flex')
