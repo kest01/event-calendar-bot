@@ -22,7 +22,9 @@ db.serialize(() => {
       place TEXT,
       photo TEXT,
       owner_id TEXT,
-      created_at TEXT DEFAULT CURRENT_TIMESTAMP
+      created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+      event_type TEXT NOT NULL DEFAULT 'Прочее',
+      link TEXT
     )
   `)
   

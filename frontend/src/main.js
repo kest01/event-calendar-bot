@@ -92,7 +92,7 @@ async function initApp() {
 // Запуск приложения
 initApp()
 
-function isPersonalChar(chat_id) {
+function isPersonalChat(chat_id) {
   return !chat_id || chat_id.startsWith('-');
 }
 
@@ -101,7 +101,7 @@ function addTitleText(text) {
 }
 
 function addTitleForUser(groupId, user) {
-  if (isPersonalChar(groupId)) {
+  if (isPersonalChat(groupId)) {
     addTitleText(user ? `Личный календарь ${user.first_name} ${user.last_name}` : 'Привет 👋')
   } else {
     addTitleText('Календарь мероприятий')
