@@ -1,0 +1,18 @@
+{
+  "zoo-code.useAgentRules": true,
+  "zoo-code.allowedCommands": [
+    "git status",
+    "git diff",
+    "git log",
+    "git show",
+    "npm run build"
+  ],
+  "zoo-code.deniedCommands": [
+    "git push",
+    "git reset --hard",
+    "git clean",
+    "rm -rf"
+  ],
+  "zoo-code.preventCompletionWithOpenTodos": false,
+  "zoo-code.newTaskRequireTodos": false
+}

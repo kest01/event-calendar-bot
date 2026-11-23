@@ -4,3 +4,7 @@ dist
 data
 .gigaide
 .idea
+.git
+package-lock.json
+*.sqlite
+plans/done
