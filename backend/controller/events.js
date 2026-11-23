@@ -27,7 +27,8 @@ export function getEvents(req, res) {
         owner_id: row.owner_id,
         created_at: row.created_at,
         event_type: row.event_type,
-        link: row.link
+        link: row.link,
+        creator: row.creator
       }))
 
       res.json(events)
@@ -37,7 +38,7 @@ export function getEvents(req, res) {
 
 export function saveEvent(req, res) {
   console.log('Save event ' + JSON.stringify(req.body))
-  const { id, group_id, title, start_time, description, place, photo, owner_id, event_type, link } = req.body
+  const { id, group_id, title, start_time, description, place, photo, owner_id, event_type, link, creator } = req.body
   const resolvedEventType = event_type || 'Прочее'
 
   if (id) {
@@ -67,10 +68,10 @@ export function saveEvent(req, res) {
   } else {
     db.run(
       `
-      INSERT INTO events (group_id, title, start_time, description, place, photo, owner_id, event_type, link, created_at)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now'))
+      INSERT INTO events (group_id, title, start_time, description, place, photo, owner_id, event_type, link, creator, created_at)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now'))
       `,
-      [group_id, title, start_time, description, place, photo, owner_id, resolvedEventType, link || null],
+      [group_id, title, start_time, description, place, photo, owner_id, resolvedEventType, link || null, creator || null],
       function (err) {
         if (err) {
           return res.status(500).json({ error: err.message })

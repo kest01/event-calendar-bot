@@ -5,9 +5,12 @@
  - В папке backend бэковая часть Telegram бота, а также рест сервисы, к которым обращается фронт. 
 
 TODO Backlog
-- Добавить в базу поле с автором 
+- 
 
 
 Для отладки:
-Урл для запуска в браузере: https://testovyj-bot-kest01.waw0.amvera.tech/?tgWebAppStartParam=8090954990011115460
-Урл для запуска из TG: https://t.me/kest01_test_bot/start?startapp=8090954990011115460
+- Локальный запуск бэка: `npm run dev:backend`
+- Локальный запуск фронта: `npm run dev:frontend`
+- Урл локального запуска: http://127.0.0.1:5173/?tgWebAppStartParam=8090954990011115460
+- Урл для запуска в браузере: https://testovyj-bot-kest01.waw0.amvera.tech/?tgWebAppStartParam=8090954990011115460
+- Урл для запуска из TG: https://t.me/kest01_test_bot/start?startapp=8090954990011115460

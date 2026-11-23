@@ -24,7 +24,8 @@ db.serialize(() => {
       owner_id TEXT,
       created_at TEXT DEFAULT CURRENT_TIMESTAMP,
       event_type TEXT NOT NULL DEFAULT 'Прочее',
-      link TEXT
+      link TEXT,
+      creator TEXT
     )
   `)
   

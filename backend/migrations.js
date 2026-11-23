@@ -14,17 +14,17 @@ function updateSchema() {
   console.log('Начало обновления схемы данных...')
   
   db.run(
-    `ALTER TABLE events ADD COLUMN link TEXT`,
+    `ALTER TABLE events ADD COLUMN creator TEXT`,
     [],
     function(err) {
       if (err) {
         if (!err.message.includes('duplicate column name')) {
-          console.error('Ошибка при добавлении link:', err.message)
+          console.error('Ошибка при добавлении creator:', err.message)
         } else {
-          console.log('Столбец link уже существует')
+          console.log('Столбец creator уже существует')
         }
       } else {
-        console.log('Столбец link успешно добавлен')
+        console.log('Столбец creator успешно добавлен')
       }
     }
   )

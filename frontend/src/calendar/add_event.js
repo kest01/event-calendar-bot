@@ -74,6 +74,7 @@ export function initAddEventModal(calendar, userContext) {
       photo: photoInput.value,
       link: linkInput.value,
       owner_id: userContext.userId,
+      creator: userContext.user?.username ?? null,
       event_type: eventTypeInput.value || 'Прочее',
     }
 
