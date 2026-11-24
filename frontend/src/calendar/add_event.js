@@ -20,10 +20,18 @@ export function showAddEventPopover(info) {
 
   const coord = getEventCoordinates(info.jsEvent)
   popover.hidden = false
-  popover.style.top = `${coord.clientY + 8}px`
-  popover.style.left = `${coord.clientX + 8}px`
 
-  console.log(coord)
+  // Размеры известны только после показа элемента
+  const { width, height } = popover.getBoundingClientRect()
+  const offset = 8
+  const maxLeft = Math.max(0, window.innerWidth - width - offset)
+  const maxTop = Math.max(0, window.innerHeight - height - offset)
+
+  const left = Math.min(coord.clientX + offset, maxLeft)
+  const top = Math.min(coord.clientY + offset, maxTop)
+
+  popover.style.left = `${left}px`
+  popover.style.top = `${top}px`
 }
 
 export function initAddEventModal(calendar, userContext) {

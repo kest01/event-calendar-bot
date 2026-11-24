@@ -1,5 +1,6 @@
 import { hideElement, showElement } from "../utils"
 import { editEvent } from "./add_event"
+import { hideEventTooltip } from './event_tooltip'
 
 const eventDetailsModel = document.getElementById('event-details-modal')
 const detailsImg = document.getElementById('details-photo')
@@ -76,6 +77,7 @@ export async function openEventDetails(event) {
   updateParticipationButtons()
 
   showElement(eventDetailsModel, 'flex')
+  hideEventTooltip()
 }
 
 export function closeEventDetails() {
