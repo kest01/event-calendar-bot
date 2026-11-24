@@ -43,6 +43,20 @@ export function initAddEventModal(calendar, userContext) {
 
   const overlay = modal.querySelector('.modal-overlay')
   overlay.addEventListener('click', closeAddEventModal)
+
+  // При открытой экранной клавиатуре видимая область уменьшается,
+  // поэтому подгоняем модальное окно под visualViewport
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', syncModalWithViewport)
+    window.visualViewport.addEventListener('scroll', syncModalWithViewport)
+  }
+
+  // Прокручиваем поле в видимую область, когда оно получает фокус
+  modal.querySelectorAll('input, textarea').forEach(field => {
+    field.addEventListener('focus', () => {
+      setTimeout(() => field.scrollIntoView({ block: 'center', behavior: 'smooth' }), 300)
+    })
+  })
   
   // Инициализация выбора типа события
   eventTypeSelector.querySelectorAll('.event-type-btn').forEach(btn => {
@@ -138,6 +152,12 @@ export function initAddEventModal(calendar, userContext) {
 
 export function closeAddEventModal() {
   hideElement(modal)
+}
+
+function syncModalWithViewport() {
+  const vv = window.visualViewport
+  modal.style.top = `${vv.offsetTop}px`
+  modal.style.height = `${vv.height}px`
 }
 
 export function editEvent(event) {

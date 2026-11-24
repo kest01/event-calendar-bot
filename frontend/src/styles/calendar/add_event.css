@@ -53,6 +53,11 @@
 }
 
 .modal-content {
+  box-sizing: border-box;
+  margin: auto;
+  max-height: calc(100% - 24px);
+  overflow-y: auto;
+
   background-color: var(--overlay-bg);
   color: var(--overlay-text);
 
@@ -61,6 +66,7 @@
 
   padding: 16px;
   width: 320px;
+  max-width: calc(100% - 24px);
 
   box-shadow:
     0 12px 32px rgba(0, 0, 0, 0.16),
